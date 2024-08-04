@@ -3,7 +3,7 @@ import { Article } from '../models/new-list.model';
 
 export const loadTopHeadlines = createAction(
   '[News API] Load Top Headlines',
-  props<{ country: string }>()
+  props<{ q: string }>()
 );
 
 export const loadTopHeadlinesSuccess = createAction(

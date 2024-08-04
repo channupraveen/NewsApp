@@ -39,7 +39,7 @@ export class ViewListComponent implements OnInit, OnDestroy {
     ).subscribe(params => {
       const type = params.get('type');
       if (type === 'top-headlines') {
-        this.store.dispatch(loadTopHeadlines({ country: 'us' }));
+        this.store.dispatch(loadTopHeadlines({ q: 'latest' }));
       } else if (type) {
         this.store.dispatch(loadNews({ query: type }));
       } else {

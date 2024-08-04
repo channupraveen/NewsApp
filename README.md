@@ -48,7 +48,7 @@ The project follows a modular structure with separate modules for authentication
 
 - User authentication
 - Display of top headlines
-- Category-wise news browsing
+- sources-wise news browsing
 - Search functionality
 - Responsive design
 

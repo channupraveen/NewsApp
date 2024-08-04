@@ -24,10 +24,10 @@ export class HttpRequestsService {
     return this.http.get(url, { params });
   }
 
-  getTopHeadlines(country: string = 'us'): Observable<any> {
+  getTopHeadlines(q: string = 'in'): Observable<any> {
     const url = `${this.baseUrl}/top-headlines`;
     const params = new HttpParams()
-      .set('country', country)
+      .set('q', q)
       .set('apiKey', this.apiKey);
 
     return this.http.get(url, { params });

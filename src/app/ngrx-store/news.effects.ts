@@ -43,7 +43,7 @@ export class NewsEffects {
     this.actions$.pipe(
       ofType(NewsActions.loadTopHeadlines),
       mergeMap(action =>
-        this.httpreq.getTopHeadlines(action.country).pipe(
+        this.httpreq.getTopHeadlines(action.q).pipe(
           map(news => ({
             ...news,
             articles: news.articles.filter(this.isValidArticle)
