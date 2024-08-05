@@ -2,7 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environments } from '../enviroments/enviroments';
-
+const enum news {
+headline1 = 'everything',
+headline2 = 'top-headlines',
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +17,7 @@ export class HttpRequestsService {
 
   
   getNews(query: string, pageSize: number = 30, page: number = 1): Observable<any> {
-    const url = `${this.baseUrl}/everything`;
+    const url = `${this.baseUrl}/${news.headline1}`;
     const params = new HttpParams()
       .set('q', query)
       .set('pageSize', pageSize.toString())
@@ -25,7 +28,7 @@ export class HttpRequestsService {
   }
 
   getTopHeadlines(q: string = 'in'): Observable<any> {
-    const url = `${this.baseUrl}/top-headlines`;
+    const url = `${this.baseUrl}/${news.headline2}`;
     const params = new HttpParams()
       .set('q', q)
       .set('apiKey', this.apiKey);

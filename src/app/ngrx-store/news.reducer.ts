@@ -14,19 +14,24 @@ export const initialState: NewsState = {
 
 const newsReducer = createReducer(
   initialState,
-  on(NewsActions.loadTopHeadlinesSuccess, (state, { news }) => ({
-    ...state,
-    news: news, // Replace with new articles
-  })),
   on(NewsActions.loadNewsSuccess, (state, { news }) => ({
     ...state,
     news: news, // Replace with new articles
+    error: null, // Reset the error
   })),
-  on(NewsActions.loadTopHeadlinesFailure, NewsActions.loadNewsFailure, (state, { error }) => ({
+  on(NewsActions.loadTopHeadlinesSuccess, (state, { news }) => ({
+    ...state,
+    news: news, // Replace with new articles
+    error: null, // Reset the error
+  })),
+  on(NewsActions.loadNewsFailure, (state, { error }) => ({
     ...state,
     error,
   })),
-  
+  on(NewsActions.loadTopHeadlinesFailure, (state, { error }) => ({
+    ...state,
+    error,
+  }))
 );
 
 export function reducer(state: NewsState | undefined, action: Action) {

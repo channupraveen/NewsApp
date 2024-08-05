@@ -33,7 +33,7 @@ export class NewsEffects {
             articles: news.articles.filter(this.isValidArticle)
           })),
           map(filteredNews => NewsActions.loadNewsSuccess({ news: filteredNews.articles })),
-          catchError(error => of(NewsActions.loadNewsFailure({ error })))
+          catchError(error => of(NewsActions.loadNewsFailure({ error: error.message })))
         )
       )
     )
@@ -49,7 +49,7 @@ export class NewsEffects {
             articles: news.articles.filter(this.isValidArticle)
           })),
           map(filteredNews => NewsActions.loadTopHeadlinesSuccess({ news: filteredNews.articles })),
-          catchError(error => of(NewsActions.loadTopHeadlinesFailure({ error })))
+          catchError(error => of(NewsActions.loadTopHeadlinesFailure({ error: error.message })))
         )
       )
     )

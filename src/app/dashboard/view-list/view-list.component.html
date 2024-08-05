@@ -1,34 +1,46 @@
 <div class="container mt-4" style="height: 1500px;">
-  <ng-container *ngIf="hasData; else noData">
-    <div class="row">
-      <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex" *ngFor="let article of news.slice(0, visibleArticles)">
-        <div class="card w-100 d-flex flex-column">
-          <img [src]="article.urlToImage" class="card-img-top" alt="{{ article.title }}">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">{{ article.title }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ article.author ? article.author : 'Unknown Author' }} - {{ article.publishedAt | date: 'short' }}</h6>
-            <p class="card-text">{{ article.description }}</p>
-            <div class="mt-auto">
-              <a [href]="article.url" class="btn btn-primary" target="_blank">Read More</a>
+  <ng-container *ngIf="!(error$ | async); else errorTemplate">
+    <ng-container *ngIf="hasData; else noData">
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex" *ngFor="let article of news.slice(0, visibleArticles)">
+          <div class="card w-100 d-flex flex-column">
+            <img [src]="article.urlToImage" class="card-img-top" alt="{{ article.title }}">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ article.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ article.author ? article.author : 'Unknown Author' }} - {{
+                article.publishedAt | date: 'short' }}</h6>
+              <p class="card-text">{{ article.description }}</p>
+              <div class="mt-auto">
+                <a [href]="article.url" class="btn btn-primary" target="_blank">Read More</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- View More button outside the loop -->
-    <div class="row mt-4" *ngIf="news.length > visibleArticles">
-      <div class="col-12 text-center">
-        <button class="btn btn-secondary mb-4" (click)="loadMore()">View More</button>
+      <!-- View More button outside the loop -->
+      <div class="row mt-4" *ngIf="news.length > visibleArticles">
+        <div class="col-12 text-center">
+          <button class="btn btn-secondary mb-4" (click)="loadMore()">View More</button>
+        </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-template #noData>
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2>Oops! We don't have the page you're looking for.</h2>
+          <p>Check out our <a [routerLink]="['/home']" (click)="navigate()">latest stories</a>.</p>
+        </div>
+      </div>
+    </ng-template>
   </ng-container>
 
-  <ng-template #noData>
+  <ng-template #errorTemplate>
     <div class="row">
       <div class="col-12 text-center">
-        <h2>Oops! We don't have the page you're looking for.</h2>
-        <p>Check out our <a [routerLink]="['/home']" (click)="navigate()">latest stories</a>.</p>
+        <h2>Something went wrong!</h2>
+        <p>Please try again later.</p>
       </div>
     </div>
   </ng-template>

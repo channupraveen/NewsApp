@@ -7,3 +7,8 @@ export const selectAllNews = createSelector(
   selectNewsState,
   (state: NewsState) => state.news
 );
+
+export const selectNewsError = createSelector(
+  selectNewsState,
+  (state: NewsState) => state.error
+);
